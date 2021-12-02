@@ -7,16 +7,19 @@ inputs.addAll(fileContents)
 
 var forwardDistance = 0
 var depth = 0
+var aim = 0
 
 inputs.forEach {
     val contents = it.split(" ")
     val amount = contents[1].toInt()
     when (contents[0]) {
-        "forward" -> forwardDistance += amount
-        "down" -> depth += amount
-        "up" -> depth -= amount
+        "forward" -> {
+            forwardDistance += amount
+            depth += (amount * aim)
+        }
+        "down" -> aim += amount
+        "up" -> aim -= amount
     }
 }
 
 println(forwardDistance * depth)
-
